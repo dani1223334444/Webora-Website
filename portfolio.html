@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Webora - Unsere erfolgreichen Website-Projekte</title>
+    <meta name="description" content="Entdecken Sie unsere erfolgreichen Website-Projekte für lokale Dienstleister. Von Physiotherapie bis Friseur - sehen Sie die Transformationen.">
+    <meta name="keywords" content="Website Portfolio, Webdesign Beispiele, Physiotherapie Website, Friseur Website, lokale Dienstleister">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="webora-favicon.svg">
+    <link rel="alternate icon" href="webora-favicon.svg">
+    
+    <!-- Google Fonts - Professionelle Web-Agentur Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/pages.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="webora-logo.svg" alt="Webora Logo" class="logo-img">
+                </a>
+            </div>
+            <div class="nav-phone">
+                <a href="tel:+49123456789" class="nav-phone-link">
+                    <i class="fas fa-phone"></i>
+                    +49 (0) 123 456 789
+                </a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Start</a>
+                </li>
+                <li class="nav-item">
+                    <a href="services.html" class="nav-link">Leistungen</a>
+                </li>
+                <li class="nav-item">
+                    <a href="process.html" class="nav-link">Ablauf</a>
+                </li>
+                <li class="nav-item">
+                    <a href="portfolio.html" class="nav-link active">Portfolio</a>
+                </li>
+                <li class="nav-item">
+                    <a href="about.html" class="nav-link">Über uns</a>
+                </li>
+                <li class="nav-item">
+                    <a href="feedback.html" class="nav-link">Feedback</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Kontakt</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <div class="page-header-content">
+                <div class="page-header-text">
+                    <h1>Portfolio</h1>
+                    <p>Einige unserer erfolgreichen Projekte</p>
+                </div>
+                <div class="page-header-visual">
+                    <div class="header-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="header-shapes">
+                        <div class="shape shape-1"></div>
+                        <div class="shape shape-2"></div>
+                        <div class="shape shape-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Project Section -->
+    <section class="featured-project">
+        <div class="container">
+            <div class="section-header">
+                <h2>Unser aktuelles Highlight</h2>
+                <p>Ein Beispiel für unsere Arbeit</p>
+            </div>
+            
+            <div class="showcase-project">
+                <div class="project-header">
+                    <div class="project-badge">
+                        <i class="fas fa-star"></i>
+                        <span>Beispiel Projekt</span>
+                    </div>
+                    <h3>Physiotherapie Praxis - Komplett-Relaunch</h3>
+                    <p>Von veralteter Website zu moderner, benutzerfreundlicher Online-Präsenz</p>
+                </div>
+                
+                <div class="before-after-comparison">
+                    <div class="comparison-item before">
+                        <div class="comparison-header">
+                            <h4>Vorher</h4>
+                        </div>
+                        <div class="comparison-image" onclick="openFullscreen('alte-website.jpg')">
+                            <img src="alte-website.jpg" alt="Alte Website">
+                            <div class="image-overlay">
+                                <i class="fas fa-expand"></i>
+                                <span>Klicken zum Vergrößern</span>
+                            </div>
+                        </div>
+                        <div class="comparison-problems">
+                            <h5>Probleme:</h5>
+                            <ul>
+                                <li>Veraltetes Design</li>
+                                <li>Schlechte Mobile-Ansicht</li>
+                                <li>Unübersichtliche Navigation</li>
+                                <li>Langsame Ladezeiten</li>
+                                <li>Schlechte SEO-Performance</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="comparison-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    
+                    <div class="comparison-item after">
+                        <div class="comparison-header">
+                            <h4>Nachher</h4>
+                        </div>
+                        <div class="comparison-image" onclick="openFullscreen('neue-website.jpg')">
+                            <img src="neue-website.jpg" alt="Neue Website">
+                            <div class="image-overlay">
+                                <i class="fas fa-expand"></i>
+                                <span>Klicken zum Vergrößern</span>
+                            </div>
+                        </div>
+                        <div class="comparison-benefits">
+                            <h5>Verbesserungen:</h5>
+                            <ul>
+                                <li>Modernes, responsives Design</li>
+                                <li>Optimierte Benutzerfreundlichkeit</li>
+                                <li>Professionelle Online-Präsenz</li>
+                                <li>Schnelle Ladezeiten</li>
+                                <li>Verbesserte SEO-Performance</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-details">
+                    <div class="project-stats">
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number">100%</span>
+                                <span class="stat-label">Mobile optimiert</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number">24h</span>
+                                <span class="stat-label">Online seit</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number">Neu</span>
+                                <span class="stat-label">Design & UX</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-number">+150%</span>
+                                <span class="stat-label">Mehr Besucher</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-technologies">
+                        <h5>Verwendete Technologien:</h5>
+                        <div class="tech-tags">
+                            <span class="tech-tag">Responsive Design</span>
+                            <span class="tech-tag">UX/UI Design</span>
+                            <span class="tech-tag">Mobile-First</span>
+                            <span class="tech-tag">Performance</span>
+                            <span class="tech-tag">SEO</span>
+                            <span class="tech-tag">CMS</span>
+                        </div>
+                    </div>
+                    
+                    <div class="project-actions">
+                        <a href="https://www.physiotherapie-elenaoettl.at/" class="btn-primary" target="_blank">
+                            <i class="fas fa-external-link-alt"></i>
+                            Website besuchen
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio">
+        <div class="container">
+            <div class="section-header">
+                <h2>Für wen wir arbeiten</h2>
+                <p>Von lokalen Dienstleistern bis zu innovativen Unternehmen - wir sind offen für alle Projekte</p>
+            </div>
+            
+            <div class="industries-grid">
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h3>Gesundheit & Wellness</h3>
+                    <p>Physiotherapie, Massage, Zahnarzt, Wellness - für alle Gesundheitsdienstleister</p>
+                    <div class="industry-features">
+                        <span class="feature-tag">Terminbuchung</span>
+                        <span class="feature-tag">Service-Übersicht</span>
+                        <span class="feature-tag">Kontakt-Integration</span>
+                    </div>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Beauty & Lifestyle</h3>
+                    <p>Friseure, Kosmetik, Mode, Lifestyle - für alle Beauty- und Lifestyle-Branchen</p>
+                    <div class="industry-features">
+                        <span class="feature-tag">Galerie</span>
+                        <span class="feature-tag">Preislisten</span>
+                        <span class="feature-tag">Online-Termine</span>
+                    </div>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-bed"></i>
+                    </div>
+                    <h3>Hotels & Tourismus</h3>
+                    <p>Hotels, Pensionen, Ferienwohnungen, Reisebüros - für alle Tourismus-Unternehmen</p>
+                    <div class="industry-features">
+                        <span class="feature-tag">Zimmer-Galerie</span>
+                        <span class="feature-tag">Online-Buchung</span>
+                        <span class="feature-tag">Lage & Umgebung</span>
+                    </div>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Gastronomie & Events</h3>
+                    <p>Restaurants, Cafés, Catering, Event-Services - für alle gastronomischen Betriebe</p>
+                    <div class="industry-features">
+                        <span class="feature-tag">Speisekarten</span>
+                        <span class="feature-tag">Reservierung</span>
+                        <span class="feature-tag">Event-Buchung</span>
+                    </div>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>Handwerk & Technik</h3>
+                    <p>Handwerker, Techniker, Beratung, Reparaturen - für alle technischen Dienstleister</p>
+                    <div class="industry-features">
+                        <span class="feature-tag">Referenzen</span>
+                        <span class="feature-tag">Service-Bereiche</span>
+                        <span class="feature-tag">Notfall-Kontakt</span>
+                    </div>
+                </div>
+                
+                <div class="industry-card">
+                    <div class="industry-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation & Startups</h3>
+                    <p>Startups, Innovation, neue Geschäftsmodelle - für alle innovativen Unternehmen</p>
+                    <div class="industry-features">
+                        <span class="feature-tag">Produktpräsentation</span>
+                        <span class="feature-tag">Team-Vorstellung</span>
+                        <span class="feature-tag">Investor-Info</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Results Section -->
+    <section class="results-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Messbare Ergebnisse</h2>
+                <p>Unsere Websites bringen echte Erfolge</p>
+            </div>
+            
+            <div class="results-grid">
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="result-number">+150%</div>
+                    <div class="result-label">Mehr Website-Besucher</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="result-number">100%</div>
+                    <div class="result-label">Mobile Optimiert</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="result-number">2.1s</div>
+                    <div class="result-label">Durchschnittliche Ladezeit</div>
+                </div>
+                
+                <div class="result-item">
+                    <div class="result-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="result-number">100%</div>
+                    <div class="result-label">Zufriedene Kunden</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fullscreen Image Modal -->
+    <div id="imageModal" class="image-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeFullscreen()">&times;</span>
+            <img id="modalImage" src="" alt="Vollbild">
+            <div class="modal-caption">
+                <span id="modalCaption"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ihr Projekt könnte das nächste sein</h2>
+                <p>Lassen Sie uns gemeinsam Ihre Website zu einem Erfolg machen.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn btn-primary">Projekt starten</a>
+                    <a href="services.html" class="btn btn-secondary">Leistungen ansehen</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="webora-logo.svg" alt="Webora Logo" class="footer-logo">
+                    <p>Professionelle Websites für lokale Dienstleister</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Leistungen</h3>
+                    <ul>
+                        <li><a href="services.html">Webdesign</a></li>
+                        <li><a href="services.html">Hosting</a></li>
+                        <li><a href="services.html">SEO</a></li>
+                        <li><a href="services.html">Wartung</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Rechtliches</h3>
+                    <ul>
+                        <li><a href="imprint.html">Impressum</a></li>
+                        <li><a href="privacy.html">Datenschutz</a></li>
+                        <li><a href="#">AGB</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Webora. Alle Rechte vorbehalten.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Webora</title>
+    <meta name="description" content="Webora Admin Panel - Projekt- und Bildverwaltung">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="webora-favicon.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background: linear-gradient(135deg, #F5F5F5 0%, #E8F4FD 100%);
+            min-height: 100vh;
+        }
+
+        /* Login Screen */
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .login-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-form h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1E90FF;
+            margin-bottom: 1rem;
+        }
+
+        .login-form p {
+            color: #666666;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1E90FF;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1E90FF, #0066CC);
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1E90FF;
+            border: 2px solid #1E90FF;
+        }
+
+        .btn-secondary:hover {
+            background: #1E90FF;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545, #c82333);
+            color: white;
+            box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+        }
+
+        /* Admin Panel */
+        .admin-panel {
+            display: none;
+            padding: 20px;
+        }
+
+        .admin-header {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .admin-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1E90FF;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .admin-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+
+        .admin-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1E90FF;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .file-upload {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 20px;
+            border: 2px dashed #1E90FF;
+            border-radius: 10px;
+            background: #f0f7ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .file-upload-label:hover {
+            background: #e6f3ff;
+            border-color: #0066CC;
+        }
+
+        .file-upload-label.has-file {
+            background: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+
+        .image-preview {
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .projects-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .project-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border: 1px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+        }
+
+        .project-item h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-item p {
+            color: #666666;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-actions .btn {
+            padding: 8px 16px;
+            font-size: 0.9rem;
+            width: auto;
+        }
+
+        .feedback-link {
+            background: #e6f3ff;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            border-left: 4px solid #1E90FF;
+        }
+
+        .feedback-link h4 {
+            color: #1E90FF;
+            margin-bottom: 0.5rem;
+        }
+
+        .feedback-link input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .copy-btn {
+            background: #1E90FF;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: #0066CC;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .admin-content {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .admin-actions {
+                justify-content: center;
+            }
+
+            .project-actions {
+                flex-direction: column;
+            }
+
+            .project-actions .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .login-form,
+            .admin-section {
+                padding: 1.5rem;
+            }
+
+            .admin-header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-form">
+            <h1><i class="fas fa-shield-alt"></i> Admin Panel</h1>
+            <p>Webora Projekt- und Bildverwaltung</p>
+            
+            <div class="alert alert-error" id="loginError">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span id="loginErrorText">Falsches Passwort!</span>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="adminPassword">Admin-Passwort:</label>
+                    <input type="password" id="adminPassword" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Anmelden
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <!-- Header -->
+        <div class="admin-header">
+            <h1><i class="fas fa-cogs"></i> Webora Admin Panel</h1>
+            <div class="admin-actions">
+                <button class="btn btn-secondary" onclick="refreshProjects()">
+                    <i class="fas fa-sync"></i>
+                    Aktualisieren
+                </button>
+                <button class="btn btn-danger" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Abmelden
+                </button>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="admin-content">
+            <!-- New Project Form -->
+            <div class="admin-section">
+                <h2><i class="fas fa-plus-circle"></i> Neues Projekt</h2>
+                
+                <div class="alert alert-success" id="successAlert">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="successText">Projekt erfolgreich erstellt!</span>
+                </div>
+                
+                <div class="alert alert-error" id="errorAlert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="errorText">Fehler beim Erstellen des Projekts!</span>
+                </div>
+                
+                <form id="projectForm">
+                    <div class="form-group">
+                        <label for="customerName">Kundenname:</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectName">Projektname:</label>
+                        <input type="text" id="projectName" name="projectName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="projectDescription">Projektbeschreibung:</label>
+                        <textarea id="projectDescription" name="projectDescription" placeholder="Kurze Beschreibung des Projekts..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Variante A (Bild):</label>
+                        <div class="file-upload">
+                            <input type="file" id="imageA" name="imageA" accept="image/*" onchange="previewImage('A', this)">
+                            <label for="imageA" class="file-upload-label" id="labelA">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Bild für Variante A hochladen</span>
+                            </label>
+                        </div>
+                        <div class="image-preview" id="previewA"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Variante B (Bild):</label>
+                        <div class="file-upload">
+                            <input type="file" id="imageB" name="imageB" accept="image/*" onchange="previewImage('B', this)">
+                            <label for="imageB" class="file-upload-label" id="labelB">
+                                <i class="fas fa-cloud-upload-alt"></i>
+                                <span>Bild für Variante B hochladen</span>
+                            </label>
+                        </div>
+                        <div class="image-preview" id="previewB"></div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Projekt erstellen
+                    </button>
+                </form>
+            </div>
+
+            <!-- Projects List -->
+            <div class="admin-section">
+                <h2><i class="fas fa-folder-open"></i> Projekte</h2>
+                <div class="projects-list" id="projectsList">
+                    <!-- Projects will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        const ADMIN_PASSWORD = 'webora2025'; // Change this password!
+        const STORAGE_KEY = 'webora_projects';
+
+        // Global variables
+        let projects = [];
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProjects();
+            setupEventListeners();
+        });
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Login form
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            
+            // Project form
+            document.getElementById('projectForm').addEventListener('submit', handleProjectSubmit);
+        }
+
+        // Handle login
+        function handleLogin(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            
+            if (password === ADMIN_PASSWORD) {
+                showAdminPanel();
+            } else {
+                showError('Falsches Passwort!');
+            }
+        }
+
+        // Show admin panel
+        function showAdminPanel() {
+            document.getElementById('loginContainer').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
+            refreshProjects();
+        }
+
+        // Logout
+        function logout() {
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('adminPassword').value = '';
+        }
+
+        // Handle project submission
+        function handleProjectSubmit(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const customerName = formData.get('customerName');
+            const projectName = formData.get('projectName');
+            const projectDescription = formData.get('projectDescription');
+            const imageA = formData.get('imageA');
+            const imageB = formData.get('imageB');
+            
+            // Validate required fields
+            if (!customerName || !projectName || !imageA || !imageB) {
+                showError('Bitte füllen Sie alle Pflichtfelder aus!');
+                return;
+            }
+            
+            // Create project
+            const project = {
+                id: Date.now().toString(),
+                customerName: customerName,
+                projectName: projectName,
+                projectDescription: projectDescription,
+                imageA: null,
+                imageB: null,
+                createdAt: new Date().toISOString(),
+                feedbackLink: generateFeedbackLink(customerName, projectName)
+            };
+            
+            // Convert images to base64
+            Promise.all([
+                convertToBase64(imageA),
+                convertToBase64(imageB)
+            ]).then(([base64A, base64B]) => {
+                project.imageA = base64A;
+                project.imageB = base64B;
+                
+                // Save project
+                projects.push(project);
+                saveProjects();
+                
+                // Show success
+                showSuccess(`Projekt "${projectName}" für ${customerName} erfolgreich erstellt!`);
+                
+                // Reset form
+                e.target.reset();
+                clearImagePreviews();
+                
+                // Refresh projects list
+                refreshProjects();
+            }).catch(error => {
+                showError('Fehler beim Verarbeiten der Bilder!');
+                console.error(error);
+            });
+        }
+
+        // Convert file to base64
+        function convertToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // Generate feedback link
+        function generateFeedbackLink(customerName, projectName) {
+            const projectId = btoa(`${customerName}-${projectName}`).replace(/[^a-zA-Z0-9]/g, '');
+            return `${window.location.origin}/feedback.html?project=${projectId}`;
+        }
+
+        // Preview uploaded image
+        function previewImage(variant, input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById(`preview${variant}`);
+                    const label = document.getElementById(`label${variant}`);
+                    
+                    preview.innerHTML = `<img src="${e.target.result}" alt="Vorschau ${variant}">`;
+                    label.classList.add('has-file');
+                    label.innerHTML = `<i class="fas fa-check-circle"></i><span>Bild ${variant} hochgeladen</span>`;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Clear image previews
+        function clearImagePreviews() {
+            ['A', 'B'].forEach(variant => {
+                document.getElementById(`preview${variant}`).innerHTML = '';
+                const label = document.getElementById(`label${variant}`);
+                label.classList.remove('has-file');
+                label.innerHTML = `<i class="fas fa-cloud-upload-alt"></i><span>Bild für Variante ${variant} hochladen</span>`;
+            });
+        }
+
+        // Load projects from localStorage
+        function loadProjects() {
+            const stored = localStorage.getItem(STORAGE_KEY);
+            if (stored) {
+                projects = JSON.parse(stored);
+            }
+        }
+
+        // Save projects to localStorage
+        function saveProjects() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+        }
+
+        // Refresh projects list
+        function refreshProjects() {
+            const projectsList = document.getElementById('projectsList');
+            
+            if (projects.length === 0) {
+                projectsList.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">Noch keine Projekte vorhanden.</p>';
+                return;
+            }
+            
+            projectsList.innerHTML = projects.map(project => `
+                <div class="project-item">
+                    <h3>${project.projectName}</h3>
+                    <p><strong>Kunde:</strong> ${project.customerName}</p>
+                    <p><strong>Erstellt:</strong> ${new Date(project.createdAt).toLocaleDateString('de-DE')}</p>
+                    ${project.projectDescription ? `<p><strong>Beschreibung:</strong> ${project.projectDescription}</p>` : ''}
+                    
+                    <div class="feedback-link">
+                        <h4><i class="fas fa-link"></i> Feedback-Link für Kunden:</h4>
+                        <input type="text" value="${project.feedbackLink}" readonly id="link-${project.id}">
+                        <button class="copy-btn" onclick="copyLink('${project.id}')">
+                            <i class="fas fa-copy"></i> Kopieren
+                        </button>
+                    </div>
+                    
+                    <div class="project-actions">
+                        <button class="btn btn-secondary" onclick="viewProject('${project.id}')">
+                            <i class="fas fa-eye"></i> Ansehen
+                        </button>
+                        <button class="btn btn-danger" onclick="deleteProject('${project.id}')">
+                            <i class="fas fa-trash"></i> Löschen
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Copy link to clipboard
+        function copyLink(projectId) {
+            const linkInput = document.getElementById(`link-${projectId}`);
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999);
+            document.execCommand('copy');
+            
+            // Show temporary success message
+            const btn = linkInput.nextElementSibling;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Kopiert!';
+            btn.style.background = '#28a745';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '#1E90FF';
+            }, 2000);
+        }
+
+        // View project
+        function viewProject(projectId) {
+            const project = projects.find(p => p.id === projectId);
+            if (project) {
+                // Open feedback page with project data
+                const feedbackUrl = project.feedbackLink;
+                window.open(feedbackUrl, '_blank');
+            }
+        }
+
+        // Delete project
+        function deleteProject(projectId) {
+            if (confirm('Möchten Sie dieses Projekt wirklich löschen?')) {
+                projects = projects.filter(p => p.id !== projectId);
+                saveProjects();
+                refreshProjects();
+                showSuccess('Projekt erfolgreich gelöscht!');
+            }
+        }
+
+        // Show success message
+        function showSuccess(message) {
+            const alert = document.getElementById('successAlert');
+            const text = document.getElementById('successText');
+            text.textContent = message;
+            alert.style.display = 'block';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+
+        // Show error message
+        function showError(message) {
+            const alert = document.getElementById('errorAlert');
+            const text = document.getElementById('errorText');
+            text.textContent = message;
+            alert.style.display = 'block';
+            
+            setTimeout(() => {
+                alert.style.display = 'none';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>

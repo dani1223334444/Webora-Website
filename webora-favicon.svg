@@ -1,0 +1,7 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue W symbol for favicon -->
+  <path d="M6 16 L16 6 L26 16 L36 6 L46 16 L40 24 L36 20 L26 32 L16 20 L12 24 Z" 
+        fill="#1E90FF" 
+        stroke="#1E90FF" 
+        stroke-width="0.5"/>
+</svg>

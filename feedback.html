@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kunden-Feedback | Webora</title>
+    <meta name="description" content="Geben Sie uns Ihr Feedback zu den Design-Varianten für Ihre neue Website">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="webora-favicon.svg">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background: linear-gradient(135deg, #F5F5F5 0%, #E8F4FD 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1001;
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+            min-height: 70px;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .nav-logo a {
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo img:hover {
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #1E90FF, #0066CC);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 120px 0 80px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .feedback-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .feedback-header h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #333333;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .feedback-header p {
+            font-size: 1.3rem;
+            color: #666666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Image Comparison */
+        .image-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .image-option {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            position: relative;
+        }
+
+        .image-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .image-option.selected {
+            border-color: #1E90FF;
+            box-shadow: 0 20px 40px rgba(30, 144, 255, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .image-option.selected::before {
+            content: '✓ Gewählt';
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #1E90FF, #0066CC);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 10;
+            animation: slideInDown 0.3s ease;
+        }
+
+        .image-container {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+            cursor: crosshair;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.02);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.3s ease;
+            color: white;
+            text-align: center;
+        }
+
+        .image-container:hover .image-overlay {
+            opacity: 1;
+        }
+
+        .image-overlay i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-overlay span {
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .image-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .image-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0.5rem;
+        }
+
+        .image-info p {
+            color: #666666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .select-btn {
+            background: linear-gradient(135deg, #1E90FF, #0066CC);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+            width: 100%;
+        }
+
+        .select-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
+        }
+
+        .select-btn.selected {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+
+        /* Drawing Canvas */
+        .drawing-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        .drawing-canvas.active {
+            pointer-events: all;
+        }
+
+        /* Drawing Tools */
+        .drawing-tools {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .image-container:hover .drawing-tools {
+            opacity: 1;
+        }
+
+        .drawing-tools button {
+            background: #1E90FF;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+        }
+
+        .drawing-tools button:hover {
+            background: #0066CC;
+            transform: scale(1.05);
+        }
+
+        .drawing-tools button.active {
+            background: #28a745;
+        }
+
+        /* Feedback Form */
+        .feedback-form {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .feedback-form h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .feedback-form p {
+            color: #666666;
+            text-align: center;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: #333333;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-group textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #1E90FF;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1E90FF, #0066CC);
+            color: white;
+            box-shadow: 0 4px 15px rgba(30, 144, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 144, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #1E90FF;
+            border: 2px solid #1E90FF;
+        }
+
+        .btn-secondary:hover {
+            background: #1E90FF;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 10000;
+            animation: slideInRight 0.3s ease;
+            display: none;
+        }
+
+        /* Animations */
+        @keyframes slideInDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes slideInRight {
+            from { transform: translateX(50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .feedback-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .feedback-header p {
+                font-size: 1.1rem;
+            }
+
+            .image-comparison {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .image-container {
+                height: 300px;
+            }
+
+            .feedback-form {
+                padding: 2rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .drawing-tools {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 1rem;
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container {
+                padding: 0 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .feedback-header h1 {
+                font-size: 2rem;
+            }
+
+            .image-info {
+                padding: 1.5rem;
+            }
+
+            .feedback-form {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">
+                    <img src="webora-logo.svg" alt="Webora Logo">
+                </a>
+            </div>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i>
+                Zurück zur Website
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Header -->
+            <div class="feedback-header">
+                <h1>Design-Feedback</h1>
+                <p>Wählen Sie Ihre bevorzugte Design-Variante und geben Sie uns Ihr detailliertes Feedback</p>
+            </div>
+
+            <!-- Image Comparison -->
+            <div class="image-comparison">
+                <!-- Variante A -->
+                <div class="image-option" id="optionA">
+                    <div class="image-container" id="containerA">
+                        <img src="layout-1.jpg" alt="Design Variante A" id="imageA">
+                        <div class="image-overlay">
+                            <i class="fas fa-expand"></i>
+                            <span>Klicken zum Vergrößern</span>
+                        </div>
+                        <canvas class="drawing-canvas" id="canvasA"></canvas>
+                        <div class="drawing-tools">
+                            <button type="button" onclick="toggleDrawing('A')" id="drawBtnA">
+                                <i class="fas fa-pen"></i> Zeichnen
+                            </button>
+                            <button type="button" onclick="clearDrawing('A')" id="clearBtnA">
+                                <i class="fas fa-eraser"></i> Löschen
+                            </button>
+                        </div>
+                    </div>
+                    <div class="image-info">
+                        <h3>Variante A</h3>
+                        <p>Modernes, minimalistisches Design mit klaren Linien und viel Weißraum</p>
+                        <button class="select-btn" onclick="selectOption('A')" id="btnA">
+                            <i class="fas fa-check"></i>
+                            Variante A wählen
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Variante B -->
+                <div class="image-option" id="optionB">
+                    <div class="image-container" id="containerB">
+                        <img src="layout-2.jpg" alt="Design Variante B" id="imageB">
+                        <div class="image-overlay">
+                            <i class="fas fa-expand"></i>
+                            <span>Klicken zum Vergrößern</span>
+                        </div>
+                        <canvas class="drawing-canvas" id="canvasB"></canvas>
+                        <div class="drawing-tools">
+                            <button type="button" onclick="toggleDrawing('B')" id="drawBtnB">
+                                <i class="fas fa-pen"></i> Zeichnen
+                            </button>
+                            <button type="button" onclick="clearDrawing('B')" id="clearBtnB">
+                                <i class="fas fa-eraser"></i> Löschen
+                            </button>
+                        </div>
+                    </div>
+                    <div class="image-info">
+                        <h3>Variante B</h3>
+                        <p>Warmes, einladendes Design mit organischen Formen und gemütlicher Atmosphäre</p>
+                        <button class="select-btn" onclick="selectOption('B')" id="btnB">
+                            <i class="fas fa-check"></i>
+                            Variante B wählen
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feedback Form -->
+            <div class="feedback-form">
+                <h2>Ihr Feedback</h2>
+                <p>Teilen Sie uns Ihre Gedanken zu den Design-Varianten mit</p>
+                
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="feedbackText">Detailliertes Feedback:</label>
+                        <textarea 
+                            id="feedbackText" 
+                            name="feedback" 
+                            placeholder="Beschreiben Sie, was Ihnen an den Varianten gefällt oder nicht gefällt. Welche Elemente sollten geändert werden? Haben Sie spezielle Wünsche?"
+                            required
+                        ></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i>
+                            Feedback absenden
+                        </button>
+                        <button type="button" class="btn btn-secondary" onclick="resetForm()">
+                            <i class="fas fa-undo"></i>
+                            Zurücksetzen
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i>
+        <span>Vielen Dank für Ihr Feedback!</span>
+    </div>
+
+    <script>
+        // Global variables
+        let selectedOption = null;
+        let isDrawing = { A: false, B: false };
+        let canvas = { A: null, B: null };
+        let ctx = { A: null, B: null };
+        let isDrawingActive = { A: false, B: false };
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCanvas();
+            setupEventListeners();
+            loadProjectData();
+        });
+
+        // Initialize canvas for drawing
+        function initializeCanvas() {
+            canvas.A = document.getElementById('canvasA');
+            canvas.B = document.getElementById('canvasB');
+            
+            // Set canvas size to match image container
+            [canvas.A, canvas.B].forEach(canvas => {
+                const container = canvas.parentElement;
+                canvas.width = container.offsetWidth;
+                canvas.height = container.offsetHeight;
+            });
+            
+            ctx.A = canvas.A.getContext('2d');
+            ctx.B = canvas.B.getContext('2d');
+            
+            // Set drawing properties
+            [ctx.A, ctx.B].forEach(ctx => {
+                ctx.strokeStyle = '#FFD700';
+                ctx.lineWidth = 3;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Form submission
+            document.getElementById('feedbackForm').addEventListener('submit', handleSubmit);
+            
+            // Canvas drawing events
+            setupCanvasEvents('A');
+            setupCanvasEvents('B');
+            
+            // Image click to expand
+            document.getElementById('imageA').addEventListener('click', () => openFullscreen('layout-1.jpg'));
+            document.getElementById('imageB').addEventListener('click', () => openFullscreen('layout-2.jpg'));
+        }
+
+        // Setup canvas drawing events
+        function setupCanvasEvents(option) {
+            const canvasEl = canvas[option];
+            const ctxEl = ctx[option];
+            
+            canvasEl.addEventListener('mousedown', (e) => startDrawing(e, option));
+            canvasEl.addEventListener('mousemove', (e) => draw(e, option));
+            canvasEl.addEventListener('mouseup', () => stopDrawing(option));
+            canvasEl.addEventListener('mouseout', () => stopDrawing(option));
+            
+            // Touch events for mobile
+            canvasEl.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousedown', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvasEl.dispatchEvent(mouseEvent);
+            });
+            
+            canvasEl.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent('mousemove', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvasEl.dispatchEvent(mouseEvent);
+            });
+            
+            canvasEl.addEventListener('touchend', (e) => {
+                e.preventDefault();
+                const mouseEvent = new MouseEvent('mouseup', {});
+                canvasEl.dispatchEvent(mouseEvent);
+            });
+        }
+
+        // Drawing functions
+        function startDrawing(e, option) {
+            if (!isDrawing[option]) return;
+            
+            isDrawingActive[option] = true;
+            const rect = canvas[option].getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ctx[option].beginPath();
+            ctx[option].moveTo(x, y);
+        }
+
+        function draw(e, option) {
+            if (!isDrawing[option] || !isDrawingActive[option]) return;
+            
+            const rect = canvas[option].getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            ctx[option].lineTo(x, y);
+            ctx[option].stroke();
+        }
+
+        function stopDrawing(option) {
+            isDrawingActive[option] = false;
+        }
+
+        // Toggle drawing mode
+        function toggleDrawing(option) {
+            isDrawing[option] = !isDrawing[option];
+            const canvasEl = canvas[option];
+            const btn = document.getElementById(`drawBtn${option}`);
+            
+            if (isDrawing[option]) {
+                canvasEl.classList.add('active');
+                btn.classList.add('active');
+                btn.innerHTML = '<i class="fas fa-pen"></i> Zeichnen (Aktiv)';
+            } else {
+                canvasEl.classList.remove('active');
+                btn.classList.remove('active');
+                btn.innerHTML = '<i class="fas fa-pen"></i> Zeichnen';
+            }
+        }
+
+        // Clear drawing
+        function clearDrawing(option) {
+            ctx[option].clearRect(0, 0, canvas[option].width, canvas[option].height);
+        }
+
+        // Select option
+        function selectOption(option) {
+            // Remove previous selection
+            if (selectedOption) {
+                document.getElementById(`option${selectedOption}`).classList.remove('selected');
+                document.getElementById(`btn${selectedOption}`).classList.remove('selected');
+                document.getElementById(`btn${selectedOption}`).innerHTML = 
+                    `<i class="fas fa-check"></i> Variante ${selectedOption} wählen`;
+            }
+            
+            // Set new selection
+            selectedOption = option;
+            document.getElementById(`option${option}`).classList.add('selected');
+            document.getElementById(`btn${option}`).classList.add('selected');
+            document.getElementById(`btn${option}`).innerHTML = 
+                `<i class="fas fa-check"></i> Variante ${option} gewählt`;
+        }
+
+        // Handle form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            
+            if (!selectedOption) {
+                alert('Bitte wählen Sie eine Design-Variante aus!');
+                return;
+            }
+            
+            const feedbackText = document.getElementById('feedbackText').value.trim();
+            if (!feedbackText) {
+                alert('Bitte geben Sie Ihr Feedback ein!');
+                return;
+            }
+            
+            // Collect feedback data
+            const feedbackData = {
+                selectedOption: selectedOption,
+                feedback: feedbackText,
+                timestamp: new Date().toISOString(),
+                drawings: {
+                    A: canvas.A.toDataURL(),
+                    B: canvas.B.toDataURL()
+                }
+            };
+            
+            // Log to console (for testing)
+            console.log('Feedback gesendet:', feedbackData);
+            
+            // Show success message
+            showSuccessMessage();
+            
+            // Reset form after delay
+            setTimeout(() => {
+                resetForm();
+            }, 3000);
+        }
+
+        // Reset form
+        function resetForm() {
+            selectedOption = null;
+            document.getElementById('feedbackText').value = '';
+            
+            // Reset selections
+            ['A', 'B'].forEach(option => {
+                document.getElementById(`option${option}`).classList.remove('selected');
+                document.getElementById(`btn${option}`).classList.remove('selected');
+                document.getElementById(`btn${option}`).innerHTML = 
+                    `<i class="fas fa-check"></i> Variante ${option} wählen`;
+                
+                // Clear drawings
+                clearDrawing(option);
+                isDrawing[option] = false;
+                canvas[option].classList.remove('active');
+                document.getElementById(`drawBtn${option}`).classList.remove('active');
+                document.getElementById(`drawBtn${option}`).innerHTML = 
+                    '<i class="fas fa-pen"></i> Zeichnen';
+            });
+        }
+
+        // Show success message
+        function showSuccessMessage() {
+            const message = document.getElementById('successMessage');
+            message.style.display = 'block';
+            
+            setTimeout(() => {
+                message.style.display = 'none';
+            }, 5000);
+        }
+
+        // Open fullscreen image (placeholder)
+        function openFullscreen(imageSrc) {
+            // This would open the image in fullscreen
+            // For now, just log to console
+            console.log('Opening fullscreen:', imageSrc);
+            alert('Vollbild-Modus für ' + imageSrc + ' (Feature kann später implementiert werden)');
+        }
+
+        // Load project data from URL
+        function loadProjectData() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const projectId = urlParams.get('project');
+            
+            if (projectId) {
+                // Load project from localStorage
+                const stored = localStorage.getItem('webora_projects');
+                if (stored) {
+                    const projects = JSON.parse(stored);
+                    const project = projects.find(p => {
+                        const encodedId = btoa(`${p.customerName}-${p.projectName}`).replace(/[^a-zA-Z0-9]/g, '');
+                        return encodedId === projectId;
+                    });
+                    
+                    if (project) {
+                        // Update page content with project data
+                        updateProjectContent(project);
+                    } else {
+                        console.log('Projekt nicht gefunden');
+                    }
+                }
+            }
+        }
+
+        // Update page content with project data
+        function updateProjectContent(project) {
+            // Update header
+            document.querySelector('.feedback-header h1').textContent = `Design-Feedback - ${project.projectName}`;
+            document.querySelector('.feedback-header p').textContent = `Projekt für ${project.customerName}`;
+            
+            // Update images
+            if (project.imageA) {
+                document.getElementById('imageA').src = project.imageA;
+            }
+            if (project.imageB) {
+                document.getElementById('imageB').src = project.imageB;
+            }
+            
+            // Update descriptions
+            document.querySelector('#optionA .image-info h3').textContent = `Variante A - ${project.projectName}`;
+            document.querySelector('#optionB .image-info h3').textContent = `Variante B - ${project.projectName}`;
+            
+            if (project.projectDescription) {
+                document.querySelector('#optionA .image-info p').textContent = project.projectDescription + ' (Variante A)';
+                document.querySelector('#optionB .image-info p').textContent = project.projectDescription + ' (Variante B)';
+            }
+        }
+
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            // Reinitialize canvas size
+            setTimeout(() => {
+                initializeCanvas();
+            }, 100);
+        });
+    </script>
+</body>
+</html>
