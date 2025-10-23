@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webora - Preispakete 2025 | Website-Entwicklung</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e8f4fd 100%);
+            color: #1a202c;
+            line-height: 1.6;
+            padding: 60px 40px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e90ff 0%, #4169e1 100%);
+            color: white;
+            padding: 60px;
+            text-align: center;
+        }
+
+        .header img {
+            height: 60px;
+            margin-bottom: 30px;
+            filter: brightness(0) invert(1);
+        }
+
+        .header h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .header .year {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-left: 10px;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .content {
+            padding: 80px 60px;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .intro h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.5rem;
+            color: #1a202c;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #6b7280;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .packages {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .package {
+            background: white;
+            border: 2px solid #e5e7eb;
+            border-radius: 20px;
+            padding: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .package:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(30, 144, 255, 0.15);
+            border-color: #1e90ff;
+        }
+
+        .package.featured {
+            border-color: #1e90ff;
+            box-shadow: 0 10px 30px rgba(30, 144, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .package.featured .badge {
+            position: absolute;
+            top: -15px;
+            right: 30px;
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+        }
+
+        .package-emoji {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .package-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .package h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8rem;
+            color: #1a202c;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .ideal-for {
+            color: #6b7280;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
+        .pricing {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .price-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .price-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1e90ff;
+        }
+
+        .price-value.monthly {
+            font-size: 1.2rem;
+        }
+
+        .features {
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .features li {
+            padding: 10px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: #4b5563;
+            font-size: 0.95rem;
+        }
+
+        .features i {
+            color: #10b981;
+            font-size: 1rem;
+            margin-top: 3px;
+            flex-shrink: 0;
+        }
+
+        .goal {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .goal-label {
+            font-size: 0.85rem;
+            color: #1e90ff;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .goal-text {
+            color: #1a202c;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .addons {
+            background: #f9fafb;
+            border-radius: 16px;
+            padding: 50px;
+            margin-top: 60px;
+        }
+
+        .addons h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #1a202c;
+        }
+
+        .addons-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .addons-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .addons-table th {
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        .addons-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .addons-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .addons-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .addon-name {
+            font-weight: 600;
+            color: #1a202c;
+        }
+
+        .addon-price {
+            color: #1e90ff;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .payment-info {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            border-radius: 16px;
+            padding: 50px;
+            margin-top: 60px;
+        }
+
+        .payment-info h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #1a202c;
+        }
+
+        .payment-steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .payment-step {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #1e90ff, #4169e1);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .payment-step h4 {
+            font-family: 'Space Grotesk', sans-serif;
+            margin-bottom: 10px;
+            color: #1a202c;
+        }
+
+        .payment-step p {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .footer-section {
+            background: #f9fafb;
+            padding: 50px;
+            text-align: center;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-section h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #1a202c;
+        }
+
+        .footer-section p {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #1e90ff;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        @media print {
+            body {
+                padding: 0;
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+            }
+            .package:hover {
+                transform: none;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .packages {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .package.featured {
+                transform: none;
+            }
+            .payment-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .header {
+                padding: 40px 30px;
+            }
+            .header h1 {
+                font-size: 2rem;
+            }
+            .content {
+                padding: 40px 30px;
+            }
+            .addons, .payment-info {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="webora-logo.svg" alt="Webora Logo">
+            <h1>Webora Preispakete <span class="year">Stand 2025</span></h1>
+            <p>Transparente Preise • Faire Konditionen • Messbare Ergebnisse</p>
+        </div>
+
+        <div class="content">
+            <div class="intro">
+                <h2>Wählen Sie Ihr passendes Paket</h2>
+                <p>Einmalige Einrichtung + monatliche Betreuung für langfristigen Erfolg</p>
+            </div>
+
+            <div class="packages">
+                <!-- Essential Paket -->
+                <div class="package">
+                    <div class="package-emoji">🩵</div>
+                    <div class="package-header">
+                        <h3>Essential</h3>
+                        <p class="ideal-for">Ideal für: kleine Praxen, Friseure, Masseure, Start-ups</p>
+                        <div class="pricing">
+                            <div class="price-row">
+                                <span class="price-label">Einmalig</span>
+                                <span class="price-value">1.190€</span>
+                            </div>
+                            <div class="price-row">
+                                <span class="price-label">Monatlich</span>
+                                <span class="price-value monthly">49€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> Moderne Custom-Website (4-5 Seiten)</li>
+                        <li><i class="fas fa-check-circle"></i> Mobiloptimiert & DSGVO-konform</li>
+                        <li><i class="fas fa-check-circle"></i> Kontaktformular</li>
+                        <li><i class="fas fa-check-circle"></i> Google Maps Integration</li>
+                        <li><i class="fas fa-check-circle"></i> Hosting & technischer Support</li>
+                        <li><i class="fas fa-check-circle"></i> Impressum & Datenschutzseite</li>
+                    </ul>
+                    <div class="goal">
+                        <div class="goal-label">Ziel</div>
+                        <div class="goal-text">Präsenz & Seriosität schaffen</div>
+                    </div>
+                </div>
+
+                <!-- Professional Paket -->
+                <div class="package featured">
+                    <div class="badge">⭐ Beliebteste Wahl</div>
+                    <div class="package-emoji">💙</div>
+                    <div class="package-header">
+                        <h3>Professional</h3>
+                        <p class="ideal-for">Ideal für: Physios, Beautystudios, lokale Dienstleister mit Wachstumspotenzial</p>
+                        <div class="pricing">
+                            <div class="price-row">
+                                <span class="price-label">Einmalig</span>
+                                <span class="price-value">1.990€</span>
+                            </div>
+                            <div class="price-row">
+                                <span class="price-label">Monatlich</span>
+                                <span class="price-value monthly">89€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> <strong>Alles aus Essential-Paket</strong></li>
+                        <li><i class="fas fa-check-circle"></i> CMS zur eigenständigen Textänderung</li>
+                        <li><i class="fas fa-check-circle"></i> SEO-Basisoptimierung (OnPage & Local SEO)</li>
+                        <li><i class="fas fa-check-circle"></i> Google Business Einrichtung/Optimierung</li>
+                        <li><i class="fas fa-check-circle"></i> Conversion-optimiertes Design</li>
+                        <li><i class="fas fa-check-circle"></i> Call-to-Action & Vertrauenselemente</li>
+                        <li><i class="fas fa-check-circle"></i> Performance-Optimierung</li>
+                    </ul>
+                    <div class="goal">
+                        <div class="goal-label">Ziel</div>
+                        <div class="goal-text">Mehr Kundenanfragen über Google & Website</div>
+                    </div>
+                </div>
+
+                <!-- Premium Paket -->
+                <div class="package">
+                    <div class="package-emoji">💎</div>
+                    <div class="package-header">
+                        <h3>Premium</h3>
+                        <p class="ideal-for">Ideal für: Premium-Praxen, Kliniken, High-End-Marken</p>
+                        <div class="pricing">
+                            <div class="price-row">
+                                <span class="price-label">Einmalig</span>
+                                <span class="price-value">3.490€</span>
+                            </div>
+                            <div class="price-row">
+                                <span class="price-label">Monatlich</span>
+                                <span class="price-value monthly">149€</span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check-circle"></i> <strong>Alles aus Professional-Paket</strong></li>
+                        <li><i class="fas fa-check-circle"></i> Individuelles Logo & Corporate Design</li>
+                        <li><i class="fas fa-check-circle"></i> Organisiertes Fotoshooting (Partner-Fotografen)</li>
+                        <li><i class="fas fa-check-circle"></i> Erweiterte SEO (Backlinks, Contentstrategie)</li>
+                        <li><i class="fas fa-check-circle"></i> Blog/News-Bereich (CMS integriert)</li>
+                        <li><i class="fas fa-check-circle"></i> Vorrangiger Support</li>
+                    </ul>
+                    <div class="goal">
+                        <div class="goal-label">Ziel</div>
+                        <div class="goal-text">Starke Online-Marke + konstante Neukunden</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="addons">
+                <h3>⚙️ Optionale Add-ons</h3>
+                <div class="addons-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Add-on</th>
+                                <th>Beschreibung</th>
+                                <th>Preis</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="addon-name">Online-Terminbuchung</td>
+                                <td>Integration von Tools (Calendly, SimplyBook, etc.)</td>
+                                <td class="addon-price">290€</td>
+                            </tr>
+                            <tr>
+                                <td class="addon-name">SEO-Boost-Paket</td>
+                                <td>Keywordanalyse, Backlinks, Local Citations</td>
+                                <td class="addon-price">490€</td>
+                            </tr>
+                            <tr>
+                                <td class="addon-name">Social-Media Setup</td>
+                                <td>Erstellung & Einrichtung von IG + FB + Canva Templates</td>
+                                <td class="addon-price">390€</td>
+                            </tr>
+                            <tr>
+                                <td class="addon-name">Wartung „Sorglos"</td>
+                                <td>Laufende Updates, SEO-Checks, Backups</td>
+                                <td class="addon-price">39€/Monat</td>
+                            </tr>
+                            <tr>
+                                <td class="addon-name">Fotograf (extern)</td>
+                                <td>10-20 Bilder vor Ort, Praxis & Team</td>
+                                <td class="addon-price">250-500€</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="payment-info">
+                <h3>💰 Zahlungsmodell</h3>
+                <div class="payment-steps">
+                    <div class="payment-step">
+                        <div class="step-number">1</div>
+                        <h4>50% Anzahlung</h4>
+                        <p>Bei Projektstart</p>
+                    </div>
+                    <div class="payment-step">
+                        <div class="step-number">2</div>
+                        <h4>50% Restzahlung</h4>
+                        <p>Nach Abnahme</p>
+                    </div>
+                    <div class="payment-step">
+                        <div class="step-number">3</div>
+                        <h4>Monatlich</h4>
+                        <p>Hosting & Betreuung<br>(kündbar mit 1 Monat Frist)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Bereit für Ihre neue Website?</h3>
+            <p>Lassen Sie uns gemeinsam Ihre digitale Präsenz aufbauen</p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+43 (0) 123 456 789</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>kontakt@webora.at</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-globe"></i>
+                    <span>www.webora.at</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
